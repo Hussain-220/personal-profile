@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hussain Ahmad - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/ScrollTrigger.min.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="logo">HA</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="theme-toggle">🌙</div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="glitch" data-text="Welcome">Welcome</h1>
+                <p class="subtitle">to my digital space</p>
+                <div class="scroll-indicator">
+                    <span>Scroll Down</span>
+                    <div class="mouse"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Hello! I'm <span class="highlight">Hussain Ahmad</span>, a passionate Data Science student at GIKI. 
+                    I love learning new things, exploring technology, and sharing my experiences with others.</p>
+                    <div class="facts">
+                        <div class="fact">
+                            <span class="number">2+</span>
+                            <span class="label">Years Experience</span>
+                        </div>
+                        <div class="fact">
+                            <span class="number">10+</span>
+                            <span class="label">Projects</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">My Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">💻</div>
+                    <h3>Web Development</h3>
+                    <div class="skill-bar">
+                        <div class="progress" data-progress="85"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3>Graphic Design</h3>
+                    <div class="skill-bar">
+                        <div class="progress" data-progress="75"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🧩</div>
+                    <h3>Problem-Solving</h3>
+                    <div class="skill-bar">
+                        <div class="progress" data-progress="90"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎤</div>
+                    <h3>Public Speaking</h3>
+                    <div class="skill-bar">
+                        <div class="progress" data-progress="80"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="icon">📧</span>
+                        <span class="text">hussainahd.199@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">💼</span>
+                        <span class="text">LinkedIn: Coming Soon</span>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Hussain Ahmad. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animate sections on scroll
+        document.querySelectorAll('section').forEach(section => {
+            gsap.from(section, {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 80%",
+                    end: "top 20%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+        });
+
+        // Animate skill bars
+        document.querySelectorAll('.progress').forEach(bar => {
+            const progress = bar.getAttribute('data-progress');
+            gsap.to(bar, {
+                width: progress + '%',
+                duration: 1.5,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: bar,
+                    start: "top 80%"
+                }
+            });
+        });
+
+        // Theme toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            themeToggle.textContent = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
