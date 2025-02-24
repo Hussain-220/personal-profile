@@ -48,40 +48,34 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Initialize EmailJS with your User ID
-emailjs.init('eQiSg4tj9cFcSEDxD'); // Replace with your EmailJS User ID
+emailjs.init('YOUR_USER_ID_HERE');
 
 // Contact form submission with EmailJS
 document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // Prevent page refresh
-
-    // Collect form data
+    e.preventDefault();
     const formData = {
         name: this.querySelector('input[name="name"]').value,
         email: this.querySelector('input[name="email"]').value,
         message: this.querySelector('textarea[name="message"]').value
     };
-
-    // Send email via EmailJS
-    emailjs.send('service_fqgog8e', 'template_oit7mjl', formData) // Replace with your Service ID and Template ID
+    emailjs.send('YOUR_SERVICE_ID_HERE', 'YOUR_TEMPLATE_ID_HERE', formData)
         .then(() => {
             const responseDiv = document.getElementById('formResponse');
             responseDiv.textContent = 'Message sent successfully!';
-            responseDiv.style.color = '#28a745'; // Green color
-            this.reset(); // Clear the form
-
-            // Hide message after 3 seconds
+            responseDiv.style.color = '#28a745';
+            this.reset();
             setTimeout(() => {
                 responseDiv.textContent = '';
             }, 3000);
         }, (error) => {
             const responseDiv = document.getElementById('formResponse');
             responseDiv.textContent = 'Failed to send message. Try again.';
-            responseDiv.style.color = '#dc3545'; // Red color
+            responseDiv.style.color = '#dc3545';
             console.error('EmailJS error:', error);
         });
 });
 
-// Enhance hero glitch effect (optional hover animation)
+// Enhance hero glitch effect
 const glitchText = document.querySelector('.glitch');
 glitchText.addEventListener('mouseover', () => {
     gsap.to(glitchText, {
@@ -93,10 +87,13 @@ glitchText.addEventListener('mouseover', () => {
     });
 });
 
-// Fetch Lambda response
-fetch('https://n7lxu4lwph.execute-api.us-east-1.amazonaws.com/prod/profile')
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById('formResponse').innerHTML = data.message;
-    })
-    .catch(error => console.error('Error:', error));
+// Fetch Lambda response on page load
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('https://n7lxu4lwph.execute-api.us-east-1.amazonaws.com/prod/profile')
+        .then(response => response.json())
+        .then(data => {
+            const bodyData = JSON.parse(data.body);
+            document.getElementById('formResponse').innerHTML = `From Lambda: ${bodyData.message}`;
+        })
+        .catch(error => console.error('Error:', error));
+});
