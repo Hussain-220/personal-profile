@@ -92,3 +92,11 @@ glitchText.addEventListener('mouseover', () => {
         ease: 'power1.inOut'
     });
 });
+
+// Fetch Lambda response
+fetch('https://n7lxu4lwph.execute-api.us-east-1.amazonaws.com/prod/profile')
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('formResponse').innerHTML = data.message;
+    })
+    .catch(error => console.error('Error:', error));
