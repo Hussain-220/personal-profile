@@ -48,7 +48,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Initialize EmailJS with your User ID
-emailjs.init('YOUR_USER_ID_HERE');
+emailjs.init('eQiSg4tj9cFcSEDxD');
 
 // Contact form submission with EmailJS
 document.getElementById('contactForm').addEventListener('submit', function(e) {
@@ -58,7 +58,7 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
         email: this.querySelector('input[name="email"]').value,
         message: this.querySelector('textarea[name="message"]').value
     };
-    emailjs.send('YOUR_SERVICE_ID_HERE', 'YOUR_TEMPLATE_ID_HERE', formData)
+    emailjs.send('service_fqgog8e', 'template_oit7mjl', formData)
         .then(() => {
             const responseDiv = document.getElementById('formResponse');
             responseDiv.textContent = 'Message sent successfully!';
